@@ -1,0 +1,36 @@
+mode: 'train'                     # train eval
+inference: false                  # training=false, inference=true
+seed_everything: 0                # seed for all possible rngs
+network:
+  latent_size: 128                # size of latent space
+  latent_count: 1000              # how many latent vector to initialize, should be >2x size of dataset + 1
+  hidden_size: 128                # size of intermediate features
+  input_size: 4                   # number of input dimensions, here 3D+t = 4
+  num_layers: 8                   # number of intermediate layers
+  output_size: 1                  # number of output channels
+  activation: 'wire'              # activation function
+  mlp_type: 'fullresidual'        # residual connection types
+  pos_encoding: 'none'            # position encoding type
+  num_frequencies:                # not needed for our architecture
+  embedding_max_norm: 1
+  embedding_norm_type: .inf
+train_sgla: 0                     # use SGLA if > 0, determines ratio
+train_ssl: true                   # use SSL
+lr: 1e-4                          # learning rate
+validation_step: 500              # perform validation for tensorboard every n steps
+save_epoch: 4                     # save state every n epochs
+cache_images: false               # cache images in RAM
+augment_flip: true                # perform mirroring augmentation
+data_dir:                         # specify root directory of data
+database_train:                   # specify path to csv
+database_validation:              # specify path to csv
+database_inference:               # specify path to csv
+batch_size: 1                     # batch size (no need for anything other than 1)
+iterations_optimize_latent: 1000  # number of iterations during the latent vector optimization during inference
+micro_batch_ratio: 0.01           # ratio for microbatching, when performing inference for a volume
+batch_size_pixels_ratio: 0.01     # relative amount of pixels used for training
+sampling_foreground_ratio: 0.95   # amount of foreground pixels that are sampled according to mask
+epochs: 2000                      # number of training epochs
+device: 'cuda:0'                  # training device
+start_epoch: 0                    # epoch number to load model from for resuming a training or performing inference
+log_dir:                          # specify path to tensorboard log_dir to resume/load

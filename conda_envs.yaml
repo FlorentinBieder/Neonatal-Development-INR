@@ -1,0 +1,36 @@
+# mamba env install -n braindev -f conda_envs.yaml
+name: braindev
+channels:
+  - conda-forge
+  - nvidia
+  - nodefaults
+dependencies:
+  - python=3.10
+  - pytorch::pytorch-cuda=12.1
+  - pytorch::pytorch=2.1.0
+  - pytorch::torchvision
+  - nvidia::cuda=12.1
+  - lightning
+  - monai
+  - opencv
+  - numpy
+  - setproctitle
+  - matplotlib#=3.6.2
+  - conda-forge::tensorboard#=2.11.2
+  - omegaconf
+  - tqdm
+  - optuna
+  - nibabel
+  - jsonpatch
+  - pandas
+  - scipy
+  - scikit-image
+  - certifi
+  - medpy
+  - pip
+  - pip:
+      - blobfile
+      - visdom
+      - einops
+      - seg-metrics
+      - jsonargparse[signatures]>=4.18.0

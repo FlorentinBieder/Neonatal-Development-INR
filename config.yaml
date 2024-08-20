@@ -1,0 +1,21 @@
+# path to database, describing the data, referning files in data_dir
+database_train:      'database_train.csv'
+database_validation: 'database_validation.csv'
+database_inference:  'database_inference.csv'
+mode: 'train'                    # selects which database to read form
+data_dir: ''                     # path to root directory of data
+batch_size: 1                    # it is not necessary to use more
+save_epoch: 1                    # save every n-th epoch
+cache_images: true               # careful about memory consumption if enabled!
+batch_size_pixels_ratio: 0.05    # ratio of pixels of a volume are sampled per batch
+sampling_foreground_ratio: 0.90  # ratio of the sampled pixels are foreground, according to mask
+train_sgla: 0                    # ratio between 0 and 1
+train_ssl: true                  # ssl
+network:
+  mlp_type: 'fullresidual'       # type of network: 'skip2residual' 'fullresidual' 'none'
+
+# to start inference, enable following
+#inference: true
+#log_dir:
+#start_epoch: 1000
+

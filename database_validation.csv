@@ -1,0 +1,4 @@
+index, subject_id, session_id, age, image_path, mask_path
+0, CC00050XX01,  7201, 43.29, rel3_dhcp_anat_pipeline/sub-CC00050XX01/ses-7201/anat/sub-CC00050XX01_ses-7201_desc-restore_T2w.nii.gz,     rel3_dhcp_anat_pipeline/sub-CC00050XX01/ses-7201/anat/sub-CC00050XX01_ses-7201_desc-brain_mask.nii.gz
+1, CC00098AN17, 30500, 37.43, rel3_dhcp_anat_pipeline/sub-CC00098AN17/ses-30500/anat/sub-CC00098AN17_ses-30500_desc-biasfield_T2w.nii.gz, rel3_dhcp_anat_pipeline/sub-CC00098AN17/ses-30500/anat/sub-CC00098AN17_ses-30500_desc-brain_mask.nii.gz
+2, CC00098AN17, 33702, 40.29, rel3_dhcp_anat_pipeline/sub-CC00098AN17/ses-33702/anat/sub-CC00098AN17_ses-33702_desc-biasfield_T2w.nii.gz, rel3_dhcp_anat_pipeline/sub-CC00098AN17/ses-33702/anat/sub-CC00098AN17_ses-33702_desc-brain_mask.nii.gz
