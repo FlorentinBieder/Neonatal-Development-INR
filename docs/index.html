@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Brain Development INR</title>
+        <meta name="description" content="Project Page of the PatchDDM-3D Publication">
+        <meta name="author" content="Florentin Bieder">
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <!-- with inspiration from https://rutar.org/writing/how-to-build-a-personal-webpage-from-scratch/#an-overview-of-static-webpage-deployment -->
+        <div id="page">
+            <header>
+                <h1>Modeling the Neonatal Brain Development Using Implicit Neural Representations</h1>
+                <span id="venue"><a href="https://basira-lab.com/prime-miccai-2024/">PRIME</a><a href="https://conferences.miccai.org/2024/en/">-MICCAI 2024</a></span>
+                <br />
+                <br />
+                <span id="authors">
+                    <a href="mailto:florentin.bieder@unibas.ch">Florentin Bieder</a>,
+                    <a href="mailto:paul.friedrich@unibas.ch">Paul Friedrich</a>,
+                    <a href="mailto:helene.corbaz@unibas.ch">Hélène Corbaz</a>,
+                    <a href="mailto:alicia.durrer@unibas.ch">Alicia Durrer</a>,
+                    <a href="mailto:julia.wolleb@unibas.ch">Julia Wolleb</a>,
+                    <a href="mailto:philippe.cattin@unibas.ch">Philippe C. Cattin</a>
+                </span>
+                <div id="affiliation">Center for medical Image Analysis &amp; Navigation (CIAN), University of Basel</div>
+
+                <nav>
+                    <ul>
+                        <li>
+                            <!-- https://static.arxiv.org/static/browse/0.3.4/images/icons/favicon-16x16.png -->
+                            <img src="icon_arxiv.png" alt="favicon" />
+                            <a href="https://arxiv.org/abs/2408.08647">ArXiv</a>
+                        </li>
+                        <!--
+                        <li>
+                            <!-~ https://openreview.net/favicon.ico ~-> 
+                            <img src="icon_openreview.png" alt="favicon" />
+                            <a href="">OpenReview</a>
+                        </li>
+                        -->
+                        <li>
+                            <!-- https://github.githubassets.com/favicons/favicon.png -->
+                            <img src="icon_github.png" alt="favicon" />
+                            <a href="https://github.com/FlorentinBieder/Neonatal-Development-INR">GitHub</a>
+                        </li>
+                        <li>
+                            <!-- https://www.unibas.ch/.resources/unibas-main/webresources/img/unibas.ico -->
+                            <img src="icon_unibas.ico"  alt="favicon" />
+                            <a href="https://dbe.unibas.ch/en/cian/">Homepage</a>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
+            <article>
+
+                <!-- authors, affiliation --!>
+                    <h2 class="abstract">Abstract</h2>
+                    <p id="abstract">
+                    The human brain undergoes rapid development during the third trimester of pregnancy. 
+                    In this work, we model the neonatal development of the infant brain in this age range. 
+                    As a basis, we use MR images of preterm- and term-birth neonates from the 
+                    developing human connectome project (dHCP). We propose a neural network, 
+                    specifically an implicit neural representation (<abbr title="Implicit Neural Representation">INR</abbr>), to predict 2D- and 3D images 
+                    of varying time points. In order to model a subject-specific development process, 
+                    it is necessary to disentangle the age from the subjects' identity in the latent 
+                    space of the <abbr title="Implicit Neural Representation">INR</abbr>. We propose two methods, Subject Specific Latent Vectors (<abbr title="Subject Specific Latent">SSL</abbr>) 
+                    and Stochastic Global Latent Augmentation (<abbr title="Stochastic Global Latent Augmentation">SGLA</abbr>), enabling this disentanglement. 
+                    We perform an analysis of the results and compare our proposed model to an 
+                    age-conditioned denoising diffusion model as a baseline. We also show that our 
+                    method can be applied in a memory-efficient way, which is especially important for 3D data. 
+                    </p>
+
+                    <a id="fig1"><img src="overview.png" alt="visual overview of model" /></a>
+                    <p class="caption">
+                    Fig. 1:  Overview: The input to the network <b>f</b> consists of the spatial coordinates
+                    x of the desired output pixel <b>I<sub>x</sub></b>, the desired 
+                    <abbr title="post-menstrual age">PMA</abbr> <b>t &isin; T</b>, and a latent vector 
+                    <b>l &isin; Λ</b>,
+                    encoding the subject identity. The switch with probability <b>p</b> between <b>l</b> and the global
+                    latent vector <b>l<sub>G</sub></b> represents the <abbr title="Stochastic Global Latent Augmentation">SGLA</abbr></p>
+
+                    <h2>Contribution</h2>
+                    <p>
+                    We show that an <abbr title="Implicit Neural Representation">INR</abbr> can be trained to model the neonatal brain
+                    development based on sparsely- and highly irregularly sampled data with respect to
+                    the time axis. <a href="#fig1" title="Figure number is the same as in the paper.">Figure 1</a>
+                    provides an overview of the model. To enable the disentanglement along the time axis, 
+                    we propose the following two methods that can be applied
+                    independently during training:
+                    <ul>
+                        <li>
+                        A method to disentangle the subject’s <abbr title="post-menstrual age">PMA</abbr> at the time of the scan from its
+                        identity by enforcing a subject-specific latent space (<abbr title="Subject Specific Latent">SSL</abbr>).
+                        </li>
+                        <li>
+                        An augmentation method with a global latent vector in the latent space. We call it
+                        stochastic global latent augmentation (<abbr title="Stochastic Global Latent Augmentation">SGLA</abbr>). This performs similarly to <abbr title="Subject Specific Latent">SSL</abbr> but
+                        is intended to make better use of subjects with only a single scan in the dataset.
+                        We show how <abbr title="Subject Specific Latent">SSL</abbr> and <abbr title="Stochastic Global Latent Augmentation">SGLA</abbr> can improve the disentanglement, and with that, the
+                        predictions. Furthermore, we show that our <abbr title="Implicit Neural Representation">INR</abbr> approach can be run on hardware
+                        with limited GPU memory.
+                        </li>
+                    </ul>
+                    </p>
+                    <!--<a href="#fig3" title="Figure number is the same as in the paper.">Figure 3</a>) -->
+                    <!---------------------------------------------------------------------------------------->
+                    <h2>Results</h2>
+					<p>
+					From each subject in the test set, we consider two scans that were made at a different point of time, i.e., 
+					at a different <abbr title="post-menstrual age">PMA</abbr> of the subject. For a given subject, we first determine the latent vector
+					based on the input image <b>I<sup>1</sup></b>
+					and <abbr title="post-menstrual age">PMA</abbr> <b>t<sub>1</sub></b>.
+					We then use this latent vector 
+					to generate a prediction for the 
+					<abbr title="post-menstrual age">PMA</abbr> <b>t<sub>2</sub></b> of the second scan <b>I<sup>2</sup></b>.
+					We then compare the predicted image with the second scan 
+					which serves as the ground truth for all metrics that we will introduce below. 
+					This allows us to quantify how well our model predicts the development process of the brain.
+                    We show slices of these four images for multiple subjects and ages in <a href="#fig3" title="Figure number is the same as in the paper.">Figure 3</a>.
+					</p>
+                    
+                    <!---------------------------------------------------------------------------------------->
+                    <p class="caption">
+                    Fig. 3: Four samples from the test set, along with the <abbr title="post-menstrual age">PMA</abbr>
+                    <b>t<sub>1</sub></b> of the input, and the <abbr title="post-menstrual age">PMA</abbr> <b>t<sub>2</sub></b> of the target ground truth image.
+                    </p>
+                    <a id="fig3" href="https://arxiv.org/abs/2408.08647" style="text-decoration:none;">
+                        <table style="margin-left:auto; margin-right:auto;">
+                        <thead>
+                            <tr>
+                                <th>t<sub>1</sub>, t<sub>2</sub></th>
+                                <th>Input</th>
+                                <th>Reconstruction</th>
+                                <th>Target GT</th>
+                                <th>Prediction</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div>29.9</div>
+                                    <div>38.4</div>
+                                </td>
+                                <td><img class="slices" src="slices/o05.png"></td>
+                                <td><img class="slices" src="slices/f05.png"></td>
+                                <td><img class="slices" src="slices/t05.png"></td>
+                                <td><img class="slices" src="slices/s05.png"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>36.3</div>
+                                    <div>42.9</div>
+                                </td>
+                                <td><img class="slices" src="slices/o13.png"></td>
+                                <td><img class="slices" src="slices/f13.png"></td>
+                                <td><img class="slices" src="slices/t13.png"></td>
+                                <td><img class="slices" src="slices/s13.png"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>43.1</div>
+                                    <div>35.3</div>
+                                </td>
+                                <td><img class="slices" src="slices/o28.png"></td>
+                                <td><img class="slices" src="slices/f28.png"></td>
+                                <td><img class="slices" src="slices/t28.png"></td>
+                                <td><img class="slices" src="slices/s28.png"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>33.6</div>
+                                    <div>40.9</div>
+                                </td>
+                                <td><img class="slices" src="slices/o17.png"></td>
+                                <td><img class="slices" src="slices/f17.png"></td>
+                                <td><img class="slices" src="slices/t17.png"></td>
+                                <td><img class="slices" src="slices/s17.png"></td>
+                            </tr>
+                        </tbody>
+                        </table>
+                    </a>
+                    <h2>Cite</h2>
+                    <h3>BibTeX</h3>
+                    <p>
+                    <div class="codeblock">
+                    <pre><code>@article{bieder2024modeling,
+  title={Modeling the Neonatal Brain Development Using Implicit Neural Representations},
+  author={Bieder, Florentin and Friedrich, Paul and Corbaz, H{\'e}l{\`e}ne and Durrer, Alicia and Wolleb, Julia and Cattin, Philippe C},
+  journal={arXiv preprint arXiv:2408.08647},
+  year={2024}
+}</code></pre>
+                    </div>
+            </article>
+        </div>
+        <footer>
+            <p>
+            &copy; Florentin Bieder
+            </p>
+        </footer>
+    </body>
+</html>
